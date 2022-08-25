@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+	<body>
+		<main th:object="${item}" class="poly-item-detail">
+			<div class="row">
+				<div class="card">
+				  <div class="text-center w-100">
+					<img th:src="@{|/assets/images/*{image}|}" alt="..." >
+				  </div>
+				  <!-- <div class="card-body">
+				    <h5 class="card-title">Card title</h5>
+				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				  </div> -->
+				  <ul class="list-group list-group-flush">
+				    <li class="list-group-item">Sản phẩm: <span class="fw-bold text-dark">[[${item.name}]]</span></li>
+				    <li class="list-group-item">Giá: <span class="text-danger">[[${#numbers.formatCurrency(item.price)}]]</span></li>
+				    <li class="list-group-item">Ngày sản xuất: <span class="text-secondary">[[${item.createDate}]]</span></li>
+				    <li class="list-group-item">Hãng: <span class="text-info">[[${item.category.name}]]</span></li>
+				  </ul>
+				  <div class="card-body text-end">
+				    <button th:attr="ng-click=@{|cart.add(${item.id})|}" class="btn btn-sm btn-info">
+	    				<i class="fa-solid fa-cart-plus text-white px-1"></i>
+					</button>
+				  </div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<h4>Hàng cùng loại</h4>
+			</div>
+			<div class="row swiper mySwiper">
+				<div class="swiper-wrapper">
+					<div th:each="p:*{category.products}" class="p-4 pt-2 col-sm-4 swiper-slide">
+						<div class="card poly-item rounded border-primary">
+						  <img th:src="@{|/assets/images/${p.image}|}" alt="">
+						  <div class="card-body text-start">
+						    <h5 class="card-title"><b>[[${p.name}]]</b></h5>
+						    <p class="card-text text-danger">[[${#numbers.formatCurrency(p.price)}]]</p>
+						    <div class="d-flex justify-content-between">
+								<a th:href="@{|/product/detail/${p.id}|}" class="btn btn-secondary">Xem chi tiết</a>
+								<button th:attr="ng-click=@{|cart.add(${p.id})|}" class="btn btn-sm btn-info">
+									<i class="fa-solid fa-cart-plus text-white px-1"></i>
+								</button>
+							</div>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
+			    <div class="swiper-pagination mt-2"></div>
+			</div>
+		</main>
+	</body>
+</html>

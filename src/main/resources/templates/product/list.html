@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+	<body>
+		<main class="row">
+			<div th:each="p:${items}" class="p-4 col-sm-4">
+				<div class="card poly-item">
+				  <div class="text-center">
+				  	<img th:src="@{|/assets/images/${p.image}|}" class="card-img-top" alt="">
+				  </div>
+				  <div class="card-body">
+				    <h4 class="card-title fw-bold">[[${p.name}]]</h4>
+				    <h5 class="card-text text-danger">[[${#numbers.formatCurrency(p.price)}]]</h5>
+				    <div class="d-flex justify-content-between">
+				    	<a th:href="@{|/product/detail/${p.id}|}" class="btn btn-secondary">Xem chi tiết</a>
+	    				<button th:attr="ng-click=@{|cart.add(${p.id})|}" class="btn btn-sm btn-info float-right">
+	    					<i class="fa-solid fa-cart-plus text-white px-1"></i>
+						</button>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

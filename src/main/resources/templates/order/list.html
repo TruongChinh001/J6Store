@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+	<body>
+		<main>
+			<div class="card my-4">
+			  <div class="card-header bg-primary">
+			    <h5 class="text-light fw-bold">YOUR ORDERS PURCHASED</h5>
+			  </div>
+			  <div class="card-body">
+			    <table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Order No.</th>
+				      <th scope="col">Order Date</th>
+				      <th scope="col">Shopping Address</th>
+				      <th scope="col"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="order, state: ${orders}">
+				      	<td>[[${state.index}]]</td>
+				      	<td>[[${order.id}]]</td>
+				      	<td>[[${order.createDate}]]</td>
+				      	<td>[[${order.address}]]</td>
+				      	<td>
+				      		<a th:href="@{|/order/detail/${order.id}|}" class="btn btn-default">
+				      			<i class="fa-solid fa-magnifying-glass"></i>
+				      		</a>
+				      	</td>
+				    </tr>
+				  </tbody>
+				</table>
+			  </div>
+			  <div class="card-footer fw-bold d-flex justify-content-between">
+			  	<button ng-click="cart.clear()" class="btn btn-danger">
+			  		<i class="fa-solid fa-trash-can"></i> Clear All
+			  	</button>
+			  	<a th:href="@{/order/checkout}" class="btn btn-success">
+			  		<i class="fa-solid fa-money-check-dollar"></i> Checkout
+			  	</a>
+			  </div>
+			</div>
+		</main>
+	</body>
+</html>

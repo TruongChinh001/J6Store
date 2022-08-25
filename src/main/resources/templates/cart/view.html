@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+	<body>
+		<main>
+			<div class="card my-4" th:fragment="shoppingCart">
+			  <div class="card-header bg-primary">
+			    <h5 class="text-light fw-bold">SHOPPING CART</h5>
+			  </div>
+			  <div class="card-body">
+			    <table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">NAME</th>
+				      <th scope="col">IMAGE</th>
+				      <th scope="col">PRICE</th>
+				      <th scope="col">QUANTITY</th>
+				      <th scope="col">AMOUNT</th>
+				      <th scope="col"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="item in cart.items">
+				      <th>{{item.id}}</th>
+				      <td>{{item.name}}</td>
+				      <td><img src="/assets/images/{{item.image}}" style="width: 100px"></td>
+				      <td>{{item.price | number:0}} VNĐ</td>
+				      <td><input ng-change="cart.saveToLocalStorage()"
+				      	ng-model="item.quantity" type="number" min="1" style="width: 50px"></td>
+				      <td>{{item.quantity*item.price | number:0}} VNĐ</td>
+				      <td>
+				      	<button ng-click="cart.remove(item.id)" class="btn btn-sm btn-danger">
+				      		<i class="fa-solid fa-trash-can"></i>
+				      	</button>
+				      </td>
+				    </tr>
+				  </tbody>
+				</table>
+			  </div>
+			  <div class="card-footer fw-bold d-flex justify-content-between">
+			  	<button ng-click="cart.clear()" class="btn btn-danger">
+			  		<i class="fa-solid fa-trash-can"></i> Clear All
+			  	</button>
+			  	<a th:href="@{/order/checkout}" class="btn btn-success">
+			  		<i class="fa-solid fa-money-check-dollar"></i> Checkout
+			  	</a>
+			  </div>
+			</div>
+		</main>
+	</body>
+</html>

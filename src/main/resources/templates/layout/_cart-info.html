@@ -1,0 +1,10 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<div class="card my-2 border border-primary">
+		<div class="card-body text-center">
+			<i class="fa-solid fa-cart-shopping" style="font-size: 25px;"></i>
+			<a class="text-decoration-none" th:href="@{/cart/view}">
+				{{cart.count}} items x {{cart.amount | number:0}} VNĐ
+			</a>
+		</div>
+	</div>	
+</div>

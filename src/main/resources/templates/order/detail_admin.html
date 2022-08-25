@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+	<body>
+		<main th:object="${order}">
+			<div class="card my-4">
+			  <div class="card-header bg-primary">
+			    <h5 class="text-light fw-bold">ORDER INFOMATION</h5>
+			  </div>
+			  <div class="card-body">
+			    <div class="row">
+			    	<div class="form-group col-sm-4">
+			    		<div>Order Number: </div>
+			    		<input th:field="*{id}" class="form-control" readonly>
+			    	</div>
+			    	<div class="form-group col-sm-4">
+			    		<div>Purchaser: </div>
+			    		<input th:field="*{account.fullname}" class="form-control" readonly> 
+			    	</div>
+			    	<div class="form-group col-sm-4">
+			    		<div>Purchased Date: </div>
+			    		<input th:field="*{createDate}" class="form-control readonly">
+			    	</div>
+			    </div>
+			    <div class="row">
+			    	<div class="form-group col-sm-12">
+			    		<div>Shipping Address: </div>
+			    		<textarea th:field="*{address}" class="form-control" readonly></textarea>
+			    	</div>
+			    </div>
+			  </div>
+			</div>
+			<div class="card my-4" th:fragment="shoppingCart">
+				  <div class="card-header bg-primary">
+				    <h5 class="text-light fw-bold">ORDER LINES</h5>
+				  </div>
+				  <div class="card-body">
+				    <table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">NAME</th>
+					      <th scope="col">IMAGE</th>
+					      <th scope="col">PRICE</th>
+					      <th scope="col">QUANTITY</th>
+					      <th scope="col">AMOUNT</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="detail : *{orderDetails}" th:object="${detail}">
+					      	<td>[[*{product.id}]]</td>
+					      	<td><a th:href="@{|/product/detail/*{product.id}|}" class="text-decoration-none text-dark">
+					      			[[*{product.name}]]
+					      		</a>
+					      	</td>
+					      	<td><img th:src="@{|/assets/images/*{product.image}|}" style="width: 100px"></td>
+					      	<td>[[*{#numbers.formatCurrency(price)}]]</td>
+					      	<td>[[*{quantity}]]</td>
+					      	<td>[[*{#numbers.formatCurrency(price * quantity)}]]</td>
+					    </tr>
+					  </tbody>
+					</table>
+				  </div>
+				</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+    <main>
+        <form th:action="@{/j6store/register}" method="POST" th:object="${user}"
+            class="col-sm-8 col-sm-offset-2 m-auto">
+            <div class="card my-4">
+                <div class="card-header bg-primary text-center">
+                  <h5 class="text-light fw-bold">SHOPPING CART SIGN UP</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div>Username: </div>
+                        <input th:field="*{username}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div>Password: </div>
+                        <input th:field="*{password}" type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div>Fullname: </div>
+                        <input th:field="*{fullname}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div>Email: </div>
+                        <input th:field="*{email}" class="form-control">
+                    </div>
+                </div>
+                <div class="card-footer fw-bold d-flex justify-content-between">
+                    <i class="pull-left text-danger" th:text="${message}"></i>
+                    <button class="btn btn-success">Sign Up</button>
+                </div>
+              </div>
+        </form>
+    </main>
+</div>
