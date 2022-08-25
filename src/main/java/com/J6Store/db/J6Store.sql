@@ -1,3 +1,5 @@
+CREATE DATABASE [J6Store]
+GO
 USE [J6Store]
 GO
 /****** Object:  Table [dbo].[Accounts]    Script Date: 8/25/2022 4:47:57 PM ******/
